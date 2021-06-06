@@ -1,0 +1,24 @@
+server:
+  port: 7777
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8061/eureka
+  instance:
+    prefer-ip-address: true
+      
+spring:
+  application:
+    name: GatewayApi
+  cloud:
+    gateway:
+      routes:
+      - id: Orderproject
+        uri: lb://order-service
+        predicates:
+        - Path=/orderproject/**
+      - id: Userproject
+        uri: lb://user-service
+        predicates:
+        - Path=/userproject/**
